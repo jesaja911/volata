@@ -5,7 +5,7 @@ import type { RouteResult, Waypoint } from '@/lib/types'
 import { fetchWikimediaPhoto, getWikipediaUrl } from '@/lib/wikimedia'
 import { supabase } from '@/lib/supabase'
 
-// Mapbox is a client-only library – loaded dynamically
+// Mapbox is a client-only library â loaded dynamically
 let mapboxgl: typeof import('mapbox-gl') | null = null
 
 interface Props {
@@ -43,7 +43,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       const mgl = await import('mapbox-gl')
       mapboxgl = mgl
 
-      // Re-check after async import — component may have unmounted in the meantime
+      // Re-check after async import â component may have unmounted in the meantime
       if (!mapContainer.current) return
 
       mgl.default.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!
@@ -120,7 +120,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
           if (el) (el as HTMLElement).style.color = i <= stars ? '#ffcc00' : '#4a5568'
         }
         const msg = document.getElementById(`vrate-msg-${nodeId}`)
-        if (msg) { msg.textContent = '✓ Gespeichert'; (msg as HTMLElement).style.color = '#30d158' }
+        if (msg) { msg.textContent = 'â Gespeichert'; (msg as HTMLElement).style.color = '#30d158' }
       } catch (e) { console.error('Rating error', e) }
     }
     ;(window as any)._loadNodeRating = async (nodeId: string) => {
@@ -223,8 +223,10 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
     if (!map) return
 
     // Draw or update the route. Uses setData() when the source already exists
-    // to avoid the remove→add race condition that caused missing line segments.
+    // to avoid the removeâadd race condition that caused missing line segments.
     const draw = () => {
+      if (!mapboxgl) return
+      const mgl = mapboxgl
       // Clear previous markers
       markersRef.current.forEach(m => m.remove())
       markersRef.current = []
@@ -256,10 +258,10 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       }
 
       if (map.getSource('route')) {
-        // Source already exists – update data in place (no flicker, no race condition)
+        // Source already exists â update data in place (no flicker, no race condition)
         ;(map.getSource('route') as any).setData(geojsonData)
       } else {
-        // First render – create source and layers
+        // First render â create source and layers
         map.addSource('route', { type: 'geojson', data: geojsonData })
 
         // Casing (shadow)
@@ -292,7 +294,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
 
       // Departure marker (green)
       const depEl = createAirportMarker()
-      const depMarker = new mapboxgl.default.Marker({ element: depEl, anchor: 'center' })
+      const depMarker = new mgl.default.Marker({ element: depEl, anchor: 'center' })
         .setLngLat([dep.lon, dep.lat])
         .addTo(map)
       markersRef.current.push(depMarker)
@@ -300,7 +302,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       // Waypoint markers (amber)
       validWaypoints.forEach((wp, i) => {
         const el = createWaypointMarker(i + 1)
-        const marker = new mapboxgl.default.Marker({ element: el, anchor: 'center' })
+        const marker = new mgl.default.Marker({ element: el, anchor: 'center' })
           .setLngLat([wp.lon, wp.lat])
           .addTo(map)
 
@@ -310,7 +312,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       // Fit map to route bounds
       const bounds = coordinates.reduce(
         (b, c) => b.extend(c as any),
-        new mapboxgl.default.LngLatBounds(coordinates[0], coordinates[0])
+        new mgl.default.LngLatBounds(coordinates[0], coordinates[0])
       )
       map.fitBounds(bounds, { padding: { top: 80, bottom: 80, left: 80, right: 80 }, maxZoom: 10 })
     }
@@ -349,10 +351,10 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       {!result && (
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl px-8 py-6 text-center max-w-xs">
-            <div className="text-4xl mb-3">🛩️</div>
+            <div className="text-4xl mb-3">ð©ï¸</div>
             <h3 className="text-slate-200 font-semibold mb-1">Bereit zum Fliegen?</h3>
             <p className="text-slate-500 text-sm">
-              Wähle Startflughafen, Flugzeug und Blockzeit – Volata findet die schönste Route.
+              WÃ¤hle Startflughafen, Flugzeug und Blockzeit â Volata findet die schÃ¶nste Route.
             </p>
           </div>
         </div>
@@ -365,11 +367,11 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
 
 function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): string {
   const nodeLabels: Record<string, string> = {
-    castle: '🏰 Burg', ruins: '🏚 Ruine', viewpoint: '👁 Aussichtspunkt',
-    peak: '⛰ Gipfel', memorial: '🗿 Denkmal', historic: '📜 Historisch',
-    natural: '🌿 Natur', monument: '🗿 Denkmal', cathedral: '⛪ Dom / Kathedrale',
-    palace: '🏛 Schloss', monastery: '⛪ Kloster', lighthouse: '🔭 Leuchtturm',
-    waterfall: '💧 Wasserfall', lake: '🌊 See', natural_monument: '🌳 Naturdenkmal',
+    castle: 'ð° Burg', ruins: 'ð Ruine', viewpoint: 'ð Aussichtspunkt',
+    peak: 'â° Gipfel', memorial: 'ð¿ Denkmal', historic: 'ð Historisch',
+    natural: 'ð¿ Natur', monument: 'ð¿ Denkmal', cathedral: 'âª Dom / Kathedrale',
+    palace: 'ð Schloss', monastery: 'âª Kloster', lighthouse: 'ð­ Leuchtturm',
+    waterfall: 'ð§ Wasserfall', lake: 'ð See', natural_monument: 'ð³ Naturdenkmal',
     scenic: '',
   }
   const typeLabel = nodeLabels[wp.node_type ?? ''] ?? ''
@@ -385,7 +387,7 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
   // Volata community score
   const volataBlock = wp.volata_score
     ? `<div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">
-         <span style="color:#ffcc00;font-size:13px;">★</span>
+         <span style="color:#ffcc00;font-size:13px;">â</span>
          <span style="font-size:11px;color:#94a3b8;">${Number(wp.volata_score).toFixed(1)}
            <span style="color:#475569;">(${wp.rating_count ?? 0})</span>
          </span>
@@ -400,7 +402,7 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
            ${[1,2,3,4,5].map(s =>
              `<button id="vstar-${nodeId}-${s}"
                 onclick="window._volataRate('${nodeId}',${s})"
-                style="font-size:22px;cursor:pointer;background:none;border:none;padding:2px;color:#4a5568;line-height:1;">★</button>`
+                style="font-size:22px;cursor:pointer;background:none;border:none;padding:2px;color:#4a5568;line-height:1;">â</button>`
            ).join('')}
            <span id="vrate-msg-${nodeId}" style="font-size:10px;color:#64748b;margin-left:6px;"></span>
          </div>
@@ -416,11 +418,11 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
         : loading
         ? `<div id="vphoto-container-${nodeId}" style="width:100%;height:80px;background:#1e293b;border-radius:12px 12px 0 0;
                         display:flex;align-items:center;justify-content:center;color:#475569;font-size:12px;">
-             Lade Foto…
+             Lade Fotoâ¦
            </div>`
         : `<div id="vphoto-container-${nodeId}" style="width:100%;height:56px;background:#1e293b;border-radius:12px 12px 0 0;
                         display:flex;align-items:center;justify-content:center;font-size:28px;">
-             ${wp.node_type === 'peak' ? '⛰' : wp.node_type === 'castle' ? '🏰' : wp.node_type === 'palace' ? '🏛' : wp.node_type === 'viewpoint' ? '👁' : wp.node_type === 'cathedral' ? '⛪' : wp.node_type === 'monument' ? '🗿' : wp.node_type === 'lake' ? '🌊' : '📍'}
+             ${wp.node_type === 'peak' ? 'â°' : wp.node_type === 'castle' ? 'ð°' : wp.node_type === 'palace' ? 'ð' : wp.node_type === 'viewpoint' ? 'ð' : wp.node_type === 'cathedral' ? 'âª' : wp.node_type === 'monument' ? 'ð¿' : wp.node_type === 'lake' ? 'ð' : 'ð'}
            </div>`
       }
       <div style="padding:12px 14px;">
@@ -437,11 +439,11 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
         </div>
         ${volataBlock}
         <div style="font-size:10px;color:#475569;margin-bottom:8px;">
-          ${lat}°${latDir}, ${lon}°${lonDir}
+          ${lat}Â°${latDir}, ${lon}Â°${lonDir}
         </div>
         <a id="vwiki-${nodeId}" href="${wikiUrl}" target="_blank" rel="noopener"
            style="font-size:11px;color:#3b82f6;text-decoration:none;">
-          Wikipedia →
+          Wikipedia â
         </a>
         ${starsBlock}
       </div>
@@ -495,7 +497,7 @@ function createAirportMarker(): HTMLElement {
     font-size: 16px;
     box-shadow: 0 0 0 4px rgba(16,185,129,0.25), 0 4px 12px rgba(0,0,0,0.4);
   `
-  inner.textContent = '✈'
+  inner.textContent = 'â'
   el.appendChild(inner)
   return el
 }
