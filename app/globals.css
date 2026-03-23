@@ -1,0 +1,75 @@
+/* Mapbox GL CSS – must come before @tailwind */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Apple-style CSS variables ── */
+:root {
+  --apple-bg: #f5f5f7;
+  --apple-surface: #ffffff;
+  --apple-border: rgba(0, 0, 0, 0.1);
+  --apple-text: #1d1d1f;
+  --apple-secondary: #6e6e73;
+  --apple-tertiary: #aeaeb2;
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-green: #30d158;
+  --apple-red: #ff3b30;
+  --apple-orange: #ff9f0a;
+}
+
+/* ── Mapbox popup – Apple card style ── */
+.mapboxgl-popup-content {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 16px !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0,0,0,0.06) !important;
+  color: #1d1d1f !important;
+  max-width: 280px !important;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: rgba(0,0,0,0.08) !important;
+  border-bottom-color: rgba(0,0,0,0.08) !important;
+}
+
+.mapboxgl-ctrl-logo { display: none !important; }
+
+.mapboxgl-ctrl-group {
+  background: rgba(255,255,255,0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #aeaeb2; }
+
+/* ── Smooth range slider ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #e5e5ea;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0071e3;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,113,227,0.4);
+  transition: transform 0.1s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}

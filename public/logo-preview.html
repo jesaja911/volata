@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e8edf5;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    padding: 60px 40px;
+    font-family: -apple-system, sans-serif;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7a8a9e;
+  }
+  /* Show on dark bg too */
+  .dark-swatch {
+    background: #0d1b3e;
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .light-swatch {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 36px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- BADGE — Simplified, lighter                    -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="card">
+  <div class="dark-swatch">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="240" height="240">
+      <defs>
+        <path id="arcTop" d="M 22,160 A 138,138 0 1,1 298,160" fill="none"/>
+        <path id="arcBot" d="M 42,160 A 118,118 0 0,0 278,160" fill="none"/>
+        <radialGradient id="skyG" cx="50%" cy="20%" r="80%">
+          <stop offset="0%" stop-color="#5ba8ff"/>
+          <stop offset="100%" stop-color="#1a5cbf"/>
+        </radialGradient>
+        <clipPath id="badgeClip">
+          <circle cx="160" cy="160" r="108"/>
+        </clipPath>
+      </defs>
+
+      <!-- Outer ring -->
+      <circle cx="160" cy="160" r="157" fill="#0d1b3e"/>
+      <circle cx="160" cy="160" r="154" fill="none" stroke="#4a8fd4" stroke-width="2"/>
+      <circle cx="160" cy="160" r="142" fill="none" stroke="#2a6ab8" stroke-width="0.8"/>
+
+      <!-- Curved ring text -->
+      <text font-family="Arial, sans-serif" font-size="13" fill="#7ab8f5" letter-spacing="5.5" font-weight="600">
+        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">SCENIC VFR ROUTES</textPath>
+      </text>
+      <text font-family="Arial, sans-serif" font-size="11.5" fill="#4a80cc" letter-spacing="3.5">
+        <textPath href="#arcBot" startOffset="50%" text-anchor="middle">★  DEUTSCHLAND  ★</textPath>
+      </text>
+
+      <!-- Inner scene circle -->
+      <circle cx="160" cy="160" r="110" fill="url(#skyG)"/>
+      <circle cx="160" cy="160" r="110" fill="none" stroke="#5ba8ff" stroke-width="1.5"/>
+
+      <!-- Mountains (clipped, lighter/brighter) -->
+      <g clip-path="url(#badgeClip)">
+        <!-- Sky fill already from circle -->
+
+        <!-- Far back mountain -->
+        <polygon points="30,230 100,150 168,230" fill="#2b6fc9" opacity="0.55"/>
+        <polygon points="155,230 215,158 270,230" fill="#1a5cbb" opacity="0.5"/>
+
+        <!-- Main left mountain -->
+        <polygon points="40,240 128,110 215,240" fill="#1e62c4"/>
+        <!-- Snow cap -->
+        <polygon points="111,138 128,110 145,138 138,144 118,144" fill="white" opacity="0.95"/>
+        <!-- Shadow face -->
+        <polygon points="128,110 215,240 175,240" fill="#0d3d8a" opacity="0.4"/>
+
+        <!-- Right mountain -->
+        <polygon points="160,240 230,138 295,240" fill="#1a55b0"/>
+        <!-- Snow cap -->
+        <polygon points="216,162 230,138 244,162 238,167 222,167" fill="white" opacity="0.9"/>
+        <!-- Shadow -->
+        <polygon points="230,138 295,240 278,240" fill="#092e78" opacity="0.4"/>
+
+        <!-- Ground -->
+        <path d="M50,232 Q160,218 265,232 L265,280 L50,280Z" fill="#0d3070"/>
+
+        <!-- Horizon glow line -->
+        <line x1="50" y1="232" x2="265" y2="232" stroke="#7ab8f5" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- Stars -->
+        <circle cx="95" cy="130" r="1.2" fill="white" opacity="0.8"/>
+        <circle cx="135" cy="118" r="1" fill="white" opacity="0.6"/>
+        <circle cx="215" cy="122" r="1.1" fill="white" opacity="0.7"/>
+        <circle cx="245" cy="138" r="0.9" fill="white" opacity="0.5"/>
+      </g>
+
+      <!-- ═══ Cessna 172 Silhouette ═══ -->
+      <!-- High-wing, side view, brighter/whiter -->
+      <g transform="translate(160, 148) rotate(-8) scale(1.05)">
+
+        <!-- Fuselage – tapered cabin + tail boom -->
+        <path d="
+          M -38,2
+          C -32,-6  -18,-8  0,-7
+          C 12,-7  28,-6  38,-3
+          C 42,-1  42,3  38,5
+          C 28,8  12,9  0,9
+          C -18,9  -32,7  -38,2 Z
+        " fill="white"/>
+
+        <!-- Nose / engine cowl -->
+        <path d="M 36,-4 C 46,-3 50,0 46,4 C 44,6 38,6 38,5 L 38,-3 Z" fill="white"/>
+
+        <!-- Propeller -->
+        <ellipse cx="49" cy="-5" rx="2" ry="9" fill="#dde8ff" opacity="0.9" transform="rotate(-20 49 -5)"/>
+        <ellipse cx="49" cy="5" rx="2" ry="9" fill="#dde8ff" opacity="0.9" transform="rotate(20 49 5)"/>
+        <circle cx="49" cy="0" r="3" fill="#c0d4f0"/>
+
+        <!-- HIGH WING — mounted on TOP of fuselage -->
+        <!-- Wing (rectangle-ish, above fuselage) -->
+        <path d="
+          M -20,-7
+          L -60,-9  L -62,-12  L -65,-12
+          L -65,-10  L -62,-7
+          L -20,-5
+          L 15,-5
+          L 35,-7  L 35,-9  L 30,-9
+          L 15,-7 Z
+        " fill="white"/>
+
+        <!-- Wing strut (diagonal brace from fuselage bottom to wing midpoint) -->
+        <line x1="-8" y1="8" x2="-30" y2="-7" stroke="white" stroke-width="1.8" opacity="0.85"/>
+
+        <!-- Vertical tail fin -->
+        <path d="M -34,2 L -44,-18 L -40,-20 L -32,-8 L -32,2 Z" fill="white"/>
+
+        <!-- Horizontal stabilizer -->
+        <path d="M -34,4 L -58,2 L -58,5 L -34,7 Z" fill="white"/>
+        <path d="M -34,4 L -22,2 L -22,5 L -34,7 Z" fill="white" opacity="0.6"/>
+
+        <!-- Fixed tricycle gear (subtle) -->
+        <line x1="10" y1="9" x2="10" y2="18" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <line x1="-10" y1="9" x2="-10" y2="17" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <line x1="35" y1="4" x2="35" y2="12" stroke="white" stroke-width="1.2" opacity="0.4"/>
+
+        <!-- Window highlight -->
+        <path d="M 8,-6 C 14,-7 24,-6 28,-5 L 28,-2 C 24,-2 14,-3 8,-3 Z" fill="#a8d0ff" opacity="0.7"/>
+      </g>
+
+      <!-- Dashed flight arc (subtle) -->
+      <path d="M 68,210 Q 150,115 248,195" fill="none" stroke="#7ab8f5" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" clip-path="url(#badgeClip)"/>
+
+      <!-- VOLATA -->
+      <text x="160" y="251"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="bold"
+        fill="white" letter-spacing="8" text-anchor="middle">VOLATA</text>
+
+      <!-- Underline flanking lines -->
+      <line x1="50" y1="262" x2="120" y2="262" stroke="#4a8fd4" stroke-width="1" opacity="0.7"/>
+      <line x1="200" y1="262" x2="270" y2="262" stroke="#4a8fd4" stroke-width="1" opacity="0.7"/>
+      <circle cx="160" cy="262" r="2" fill="#4a8fd4" opacity="0.7"/>
+    </svg>
+  </div>
+  <div class="label">Badge</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- WORDMARK — Header / dark + light variants      -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="card">
+
+  <!-- Dark version -->
+  <div class="dark-swatch">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" width="300" height="83">
+      <defs>
+        <linearGradient id="planeG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5ba8ff"/>
+          <stop offset="100%" stop-color="#2a80ff"/>
+        </linearGradient>
+      </defs>
+
+      <!-- C172 icon, side view, high-wing -->
+      <g transform="translate(36, 36) rotate(-10) scale(0.78)">
+        <!-- Fuselage -->
+        <path d="M -36,2 C -30,-7 -16,-9 0,-8 C 14,-8 30,-7 40,-3 C 44,-1 44,3 40,5 C 30,8 14,9 0,9 C -16,9 -30,7 -36,2 Z" fill="url(#planeG)"/>
+        <!-- Nose -->
+        <path d="M 37,-4 C 48,-2 52,0 48,4 C 45,6 37,6 37,5 Z" fill="#7abcff"/>
+        <!-- Prop -->
+        <ellipse cx="50" cy="-5" rx="2" ry="8" fill="#5ba8ff" opacity="0.8" transform="rotate(-20 50 -5)"/>
+        <ellipse cx="50" cy="5" rx="2" ry="8" fill="#5ba8ff" opacity="0.8" transform="rotate(20 50 5)"/>
+        <circle cx="50" cy="0" r="3" fill="#7abcff"/>
+        <!-- High wing -->
+        <path d="M -18,-8 L -62,-10 L -65,-14 L -62,-11 L -18,-7 L 18,-7 L 36,-9 L 36,-11 L 18,-9 Z" fill="#7abcff"/>
+        <!-- Wing strut -->
+        <line x1="-6" y1="8" x2="-32" y2="-7" stroke="#5ba8ff" stroke-width="2"/>
+        <!-- Tail fin -->
+        <path d="M -32,2 L -44,-19 L -40,-21 L -30,-8 L -30,2 Z" fill="#7abcff"/>
+        <!-- H-stab -->
+        <path d="M -32,5 L -58,3 L -58,6 L -32,7 Z" fill="#5ba8ff"/>
+        <!-- Window -->
+        <path d="M 10,-7 C 18,-8 28,-7 32,-5 L 32,-2 C 28,-2 18,-3 10,-3 Z" fill="white" opacity="0.4"/>
+      </g>
+
+      <!-- VOLATA wordmark -->
+      <text x="80" y="28"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="bold"
+        fill="white" letter-spacing="5">VOLATA</text>
+
+      <!-- Subline -->
+      <text x="82" y="52"
+        font-family="Arial, sans-serif" font-size="10"
+        fill="#5ba8ff" letter-spacing="3.2">SCENIC VFR ROUTES</text>
+    </svg>
+  </div>
+
+  <!-- Light version -->
+  <div class="light-swatch">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" width="300" height="83">
+      <!-- C172 icon -->
+      <g transform="translate(36, 36) rotate(-10) scale(0.78)">
+        <path d="M -36,2 C -30,-7 -16,-9 0,-8 C 14,-8 30,-7 40,-3 C 44,-1 44,3 40,5 C 30,8 14,9 0,9 C -16,9 -30,7 -36,2 Z" fill="#0071e3"/>
+        <path d="M 37,-4 C 48,-2 52,0 48,4 C 45,6 37,6 37,5 Z" fill="#1a8fff"/>
+        <ellipse cx="50" cy="-5" rx="2" ry="8" fill="#0071e3" opacity="0.7" transform="rotate(-20 50 -5)"/>
+        <ellipse cx="50" cy="5" rx="2" ry="8" fill="#0071e3" opacity="0.7" transform="rotate(20 50 5)"/>
+        <circle cx="50" cy="0" r="3" fill="#0071e3"/>
+        <path d="M -18,-8 L -62,-10 L -65,-14 L -62,-11 L -18,-7 L 18,-7 L 36,-9 L 36,-11 L 18,-9 Z" fill="#1a8fff"/>
+        <line x1="-6" y1="8" x2="-32" y2="-7" stroke="#0071e3" stroke-width="2"/>
+        <path d="M -32,2 L -44,-19 L -40,-21 L -30,-8 L -30,2 Z" fill="#1a8fff"/>
+        <path d="M -32,5 L -58,3 L -58,6 L -32,7 Z" fill="#0071e3"/>
+        <path d="M 10,-7 C 18,-8 28,-7 32,-5 L 32,-2 C 28,-2 18,-3 10,-3 Z" fill="white" opacity="0.5"/>
+      </g>
+      <text x="80" y="28"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="bold"
+        fill="#0d1b3e" letter-spacing="5">VOLATA</text>
+      <text x="82" y="52"
+        font-family="Arial, sans-serif" font-size="10"
+        fill="#0071e3" letter-spacing="3.2">SCENIC VFR ROUTES</text>
+    </svg>
+  </div>
+  <div class="label">Wordmark — dunkel &amp; hell</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- APP ICON                                       -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="card">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140">
+    <defs>
+      <radialGradient id="icoBg2" cx="40%" cy="25%" r="75%">
+        <stop offset="0%" stop-color="#1a5cbf"/>
+        <stop offset="100%" stop-color="#071230"/>
+      </radialGradient>
+      <linearGradient id="icoSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a80d4"/>
+        <stop offset="100%" stop-color="#1040a0"/>
+      </linearGradient>
+      <clipPath id="icoClip2">
+        <rect x="0" y="0" width="100" height="100" rx="22"/>
+      </clipPath>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="100" height="100" rx="22" fill="url(#icoBg2)"/>
+
+    <!-- Sky + mountains clipped -->
+    <g clip-path="url(#icoClip2)">
+      <rect x="0" y="0" width="100" height="75" fill="url(#icoSky)" opacity="0.7"/>
+
+      <!-- Mountains -->
+      <polygon points="0,75 32,28 62,75" fill="#1e5cbf"/>
+      <polygon points="25,47 32,28 39,47 36,50 28,50" fill="white" opacity="0.92"/>
+      <polygon points="32,28 62,75 48,75" fill="#0a3080" opacity="0.4"/>
+
+      <polygon points="42,75 66,34 88,75" fill="#1748a8"/>
+      <polygon points="58,52 66,34 74,52 70,55 62,55" fill="white" opacity="0.85"/>
+      <polygon points="66,34 88,75 80,75" fill="#07245e" opacity="0.4"/>
+
+      <!-- Ground -->
+      <rect x="0" y="72" width="100" height="28" fill="#071638"/>
+      <line x1="0" y1="73" x2="100" y2="73" stroke="#5ba8ff" stroke-width="0.7" opacity="0.4"/>
+    </g>
+
+    <!-- C172 icon (small, for app icon) -->
+    <g transform="translate(50, 34) rotate(-8) scale(0.48)">
+      <path d="M -36,2 C -30,-7 -16,-9 0,-8 C 14,-8 30,-7 40,-3 C 44,-1 44,3 40,5 C 30,8 14,9 0,9 C -16,9 -30,7 -36,2 Z" fill="white"/>
+      <path d="M 37,-4 C 48,-2 52,0 48,4 C 45,6 37,6 37,5 Z" fill="white"/>
+      <ellipse cx="50" cy="-4" rx="1.5" ry="7" fill="white" opacity="0.8" transform="rotate(-20 50 -4)"/>
+      <ellipse cx="50" cy="4" rx="1.5" ry="7" fill="white" opacity="0.8" transform="rotate(20 50 4)"/>
+      <path d="M -18,-8 L -62,-10 L -65,-13 L -62,-10 L -18,-7 L 18,-7 L 36,-9 L 36,-10 L 18,-8 Z" fill="white"/>
+      <line x1="-6" y1="8" x2="-32" y2="-7" stroke="white" stroke-width="2.5"/>
+      <path d="M -32,2 L -44,-19 L -40,-21 L -30,-8 L -30,2 Z" fill="white"/>
+      <path d="M -32,5 L -58,3 L -58,6 L -32,7 Z" fill="white"/>
+    </g>
+
+    <!-- VOLATA text bottom -->
+    <text x="50" y="90"
+      font-family="Georgia, serif" font-size="13" font-weight="bold"
+      fill="white" letter-spacing="2.5" text-anchor="middle">VOLATA</text>
+  </svg>
+  <div class="label">App Icon</div>
+</div>
+
+</body>
+</html>
