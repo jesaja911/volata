@@ -439,7 +439,7 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
         </div>
         ${volataBlock}
         <div style="font-size:10px;color:#475569;margin-bottom:8px;">
-          ${lat}Â&#9733;${latDir}, ${lon}Â&#9733;${lonDir}
+          ${lat}${latDir}, ${lon}${lonDir}
         </div>
         <a id="vwiki-${nodeId}" href="${wikiUrl}" target="_blank" rel="noopener"
            style="font-size:11px;color:#3b82f6;text-decoration:none;">
