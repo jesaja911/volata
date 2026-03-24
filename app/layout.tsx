@@ -9,6 +9,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className="h-full">
+      <head>
+        <meta charSet="UTF-8" />
+      </head>
       <body className="h-full antialiased" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif', background: '#f5f5f7', color: '#1d1d1f' }}>
         {children}
       </body>
