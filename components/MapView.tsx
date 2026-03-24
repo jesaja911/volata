@@ -247,7 +247,7 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
       )
       const coordinates: [number, number][] = [
         [dep.lon, dep.lat],
-        ...validWaypoints.map(wp => [wp.lon, wp.lat] as [number, number]),
+        &#8594;validWaypoints.map(wp => [wp.lon, wp.lat] as [number, number]),
         [dep.lon, dep.lat], // close the loop
       ]
 
@@ -367,8 +367,8 @@ export default function MapView({ result, activeWaypoints, highlightedWaypoint, 
 
 function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): string {
   const nodeLabels: Record<string, string> = {
-    castle: 'ð° Burg', ruins: 'ð Ruine', viewpoint: 'ð Aussichtspunkt',
-    peak: 'â° Gipfel', memorial: 'ð¿ Denkmal', historic: 'ð Historisch',
+    castle: 'ð&#9733; Burg', ruins: 'ð Ruine', viewpoint: 'ð Aussichtspunkt',
+    peak: 'â&#9733; Gipfel', memorial: 'ð¿ Denkmal', historic: 'ð Historisch',
     natural: 'ð¿ Natur', monument: 'ð¿ Denkmal', cathedral: 'âª Dom / Kathedrale',
     palace: 'ð Schloss', monastery: 'âª Kloster', lighthouse: 'ð­ Leuchtturm',
     waterfall: 'ð§ Wasserfall', lake: 'ð See', natural_monument: 'ð³ Naturdenkmal',
@@ -422,7 +422,7 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
            </div>`
         : `<div id="vphoto-container-${nodeId}" style="width:100%;height:56px;background:#1e293b;border-radius:12px 12px 0 0;
                         display:flex;align-items:center;justify-content:center;font-size:28px;">
-             ${wp.node_type === 'peak' ? 'â°' : wp.node_type === 'castle' ? 'ð°' : wp.node_type === 'palace' ? 'ð' : wp.node_type === 'viewpoint' ? 'ð' : wp.node_type === 'cathedral' ? 'âª' : wp.node_type === 'monument' ? 'ð¿' : wp.node_type === 'lake' ? 'ð' : 'ð'}
+             ${wp.node_type === 'peak' ? 'â&#9733;' : wp.node_type === 'castle' ? 'ð&#9733;' : wp.node_type === 'palace' ? 'ð' : wp.node_type === 'viewpoint' ? 'ð' : wp.node_type === 'cathedral' ? 'âª' : wp.node_type === 'monument' ? 'ð¿' : wp.node_type === 'lake' ? 'ð' : 'ð'}
            </div>`
       }
       <div style="padding:12px 14px;">
@@ -439,7 +439,7 @@ function buildPopupHTML(wp: Waypoint, photo: string | null, loading: boolean): s
         </div>
         ${volataBlock}
         <div style="font-size:10px;color:#475569;margin-bottom:8px;">
-          ${lat}Â°${latDir}, ${lon}Â°${lonDir}
+          ${lat}Â&#9733;${latDir}, ${lon}Â&#9733;${lonDir}
         </div>
         <a id="vwiki-${nodeId}" href="${wikiUrl}" target="_blank" rel="noopener"
            style="font-size:11px;color:#3b82f6;text-decoration:none;">
